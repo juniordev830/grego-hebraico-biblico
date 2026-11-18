@@ -4,8 +4,8 @@ export function dateKey(date = new Date()): string {
 }
 
 export function addDays(day: string, offset: number): string {
-  const date = new Date(day + 'T12:00:00');
-  date.setDate(date.getDate() + offset);
-  return dateKey(date);
+  const date = new Date(day + 'T00:00:00Z');
+  date.setUTCDate(date.getUTCDate() + offset);
+  return date.toISOString().split('T', 1)[0];
 }
 

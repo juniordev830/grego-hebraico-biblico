@@ -60,7 +60,7 @@ export default function App() {
           <button aria-pressed={mode === 'table'} onClick={() => setMode('table')}>Consultar lista</button>
         </div>
       </section>
-      <section className="panel stack">
+      <section className="panel stack" id="pratica" tabIndex={-1}>
         {mode === 'table' && <><h2>{kind === 'alphabet' ? 'Alfabeto' : 'Vocabulário'}</h2>
           <ul className="list">{deck.map(card => <li className="subtle letter-row" key={card.id}><div className="letter">{word(card)}</div>
             <div><strong>{card.name} · {card.transliteration}</strong><p>{card.sound}</p>{card.reference && <small>{card.reference}</small>}</div>
@@ -101,7 +101,7 @@ export default function App() {
         {storageError && <p className="error" role="alert">{storageError}</p>}
       </section>
     </div>
-    <aside className="panel stack">
+    <aside className="panel stack" id="desempenho" tabIndex={-1}>
       <h2>Seu desempenho</h2>
       <div className="three">
         <div className="stat">A revisar<strong>{due.length}</strong></div>

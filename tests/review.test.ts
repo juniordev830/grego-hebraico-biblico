@@ -3,6 +3,16 @@ import { test } from 'node:test';
 import { cards } from '../src/cards.ts';
 import { grade, optionsFor, queue } from '../src/review.ts';
 
+test('o intervalo das revisões segue o calendário civil', t => {
+  const previous = process.env.TZ;
+  process.env.TZ = 'Pacific/Apia';
+  t.after(() => {
+    if (previous === undefined) delete process.env.TZ;
+    else process.env.TZ = previous;
+  });
+  assert.equal(grade(undefined, 'lembrei', '2011-12-29').due, '2011-12-30');
+});
+
 test('alfabetos incluem 24 letras gregas e 22 letras hebraicas e formas finais', () => {
   assert.equal(cards.filter(card => card.language === 'grego' && card.kind === 'alphabet').length, 24);
   assert.equal(cards.filter(card => card.language === 'hebraico' && card.kind === 'alphabet').length, 22);

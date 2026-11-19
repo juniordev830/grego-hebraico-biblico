@@ -2,14 +2,12 @@ import { useMemo, useState } from 'react';
 import { cards } from './cards.ts';
 import type { Card, Kind, Language } from './cards.ts';
 import { dateKey } from './dates.ts';
-import { grade, optionsFor, queue } from './review.ts';
-import type { Grade, Review } from './review.ts';
+import { grade, optionsFor, parseProgress, queue } from './review.ts';
+import type { Grade, Progress } from './review.ts';
 import { useLocalState } from './storage.ts';
 
-type Attempt = { card: string; date: string; choice: Grade };
-type State = { reviews: Record<string, Review>; history: Attempt[] };
 type Exercise = { card: Card; options: string[]; selected?: string };
-const initial: State = { reviews: {}, history: [] };
+const initial: Progress = { reviews: {}, history: [] };
 const labels = { grego: 'Grego koiné', hebraico: 'Hebraico bíblico' };
 const cardById = new Map(cards.map(card => [card.id, card]));
 
@@ -18,7 +16,7 @@ export default function App() {
   const [language, setLanguage] = useState<Language>('grego');
   const [kind, setKind] = useState<Kind>('alphabet');
   const [mode, setMode] = useState<'cards' | 'exercise' | 'table'>('cards');
-  const [state, setState, storageError] = useLocalState('idiomas-v1', initial);
+  const [state, setState, storageError] = useLocalState('idiomas-v1', initial, parseProgress);
   const [hidden, setHidden] = useState<string[]>([]);
   const [revealed, show] = useState(false);
   const [exercise, setExercise] = useState<Exercise>();

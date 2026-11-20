@@ -16,7 +16,10 @@ createRoot(document.getElementById('root')!).render(
     <main id="conteudo">
       <div className="intro">
         <h1>Grego e hebraico bíblico</h1>
-        <p>SUBGrego e hebraico bíblico</p>
+        <nav className="atalhos" aria-label="Seções desta página">
+          <a href="#pratica">Praticar</a>
+          <a href="#desempenho">Desempenho</a>
+        </nav>
       </div>
       <App />
     </main>
